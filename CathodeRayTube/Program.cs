@@ -10,6 +10,32 @@ internal class Program
         Dictionary<int, int> cycles = GetCycles(instructions);
         int sum = SumSignalStrengths(cycles, [20, 60, 100, 140, 180, 220]);
         Console.WriteLine("Sum: " + sum);
+        Console.WriteLine();
+        PrintSprite(cycles);
+    }
+
+    private static void PrintSprite(Dictionary<int, int> cycles)
+    {
+        int pixelsPerRow = 40;
+
+        for (int i = 0; i < cycles.Count; i++)
+        {
+            int position = i % pixelsPerRow;
+
+            if (cycles[i] == position - 1 || cycles[i] == position || cycles[i] == position + 1)
+            {
+                Console.Write("#");
+            }
+            else
+            {
+                Console.Write(".");
+            }
+
+            if (position + 1 == pixelsPerRow)
+            {
+                Console.WriteLine(string.Empty);
+            }
+        }
     }
 
     private static int SumSignalStrengths(Dictionary<int, int> cycles, int[] cycleIndexes)
